@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1> LIST</h1>
+
+    <ol>
+        {% for key in liste %}
+            <li> film: {{ key}} </li>
+        {% endfor %}
+    </ol>
+
+{% endblock %}
+
+{% block title %} {{ parent() }}|list
+
+{% endblock %}
+

@@ -1,31 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Accueil bucket-list </h1>
+{% extends 'base.html.twig' %}
 
-    <ul>
-        <li>Neil Armstrong</li>
-        <li>Alan Bean</li>
-        <li>Peter Conrad</li>
-        <li>Edgar Mitchell</li>
-        <li>Alan Shepard</li>
-    </ul>
-{% set maVariable = "ok pour tout" %}
-    {% set mytab = ["nom", "prenom","25"] %}
-    {% set nombre = 5 %}
- <p> il est {{ maVariable }} {{ nombre}} </p>
-        {% for name in mytab %}
-        <p> {{ name }}</p>
-        {% endfor %}
+{% block title %}  {{ parent() }}|Home {% endblock %}
 
+{% block body %}
 
+    <h1> WELCOME </h1>
+<div>
 
-</body>
-</html>
+    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci culpa enim nemo nihil numquam perferendis saepe sit,
+        soluta velit veniam. Aliquid dolores iure mollitia nam obcaecati officiis quidem quos voluptatum. </p>
+</div>
+{% endblock %}
