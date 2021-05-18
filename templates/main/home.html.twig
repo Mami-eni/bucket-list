@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Accueil bucket-list </h1>
+
+    <ul>
+        <li>Neil Armstrong</li>
+        <li>Alan Bean</li>
+        <li>Peter Conrad</li>
+        <li>Edgar Mitchell</li>
+        <li>Alan Shepard</li>
+    </ul>
+{% set maVariable = "ok pour tout" %}
+    {% set mytab = ["nom", "prenom","25"] %}
+    {% set nombre = 5 %}
+ <p> il est {{ maVariable }} {{ nombre}} </p>
+        {% for name in mytab %}
+        <p> {{ name }}</p>
+        {% endfor %}
+
+
+
+</body>
+</html>
