@@ -3,9 +3,21 @@
 {% block body %}
     <h1> LIST</h1>
 
-    <ol>
-        {% for key in liste %}
-            <li> film: {{ key}} </li>
+    <ol class = "grille">
+        {% for wish in wishList %}
+            <li class="grid-item"> <a href=" {{ path('wish_detail',{'id':wish.id}) }}">  <P> {{ wish.title}} </P></a>
+
+                <p> creation: {{ wish.dateCreated|date("Y-m-d")}}  </p>
+                <p> Note: {{ wish.note }}</p>
+
+
+
+            </li>
+
+
+            {% else %}
+                <p>  BDD vide ! </p>
+
         {% endfor %}
     </ol>
 
