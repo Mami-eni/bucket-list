@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\WishRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=WishRepository::class)
@@ -18,16 +19,37 @@ class Wish
     private $id;
 
     /**
+     *  @Assert\NotBlank(message="Please provide a title")
+     *  * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Length(min=1, max=250, minMessage="minimum 1 caractere", maxMessage=" maximum 250 " )
+     *
      * @ORM\Column(type="string", length=250)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Please provide a description")
+     * *  * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     *@Assert\Length(min=2, max=3000, minMessage="minimum 2 caracteres", maxMessage=" maximum 3000 " )
+     *
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
+     * @Assert\NotBlank(message="Please provide an author")
+     * *  * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Length(min=1, max=50, minMessage="minimum 1 caractere", maxMessage=" maximum 50 " )
+     *
      * @ORM\Column(type="string", length=50)
      */
     private $author;
@@ -43,6 +65,15 @@ class Wish
     private $dateCreated;
 
     /**
+     * @Assert\NotBlank(message="Please give a rank")
+     *
+     *
+     * @Assert\Range(min="0",max="10",notInRangeMessage=" rank out of boundaries ! ")
+     * * @Assert\Type(
+     *     type="float",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+
      * @ORM\Column(type="decimal", precision=3, scale=1)
      */
     private $note;
@@ -117,7 +148,7 @@ class Wish
         return $this->note;
     }
 
-    public function setNote(string $note): self
+    public function setNote(float $note): self
     {
         $this->note = $note;
 

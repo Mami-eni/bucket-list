@@ -19,11 +19,14 @@ class WishRepository extends ServiceEntityRepository
         parent::__construct($registry, Wish::class);
     }
 
-    public function findBestNotation()
+    public function findBestNotation($page)
     {
         $queryBuilder = $this->createQueryBuilder('w');
-        $queryBuilder->andWhere('w.note >7') -> andWhere('w.isPublished = 0')->orderBy('w.note','DESC');
+       // $queryBuilder->andWhere('w.note >7') -> andWhere('w.isPublished = 0')->orderBy('w.note','DESC');
         $query = $queryBuilder->getQuery();
+
+        $offset = ($page -1) *10;
+        $query->setFirstResult($offset);
         $query->setMaxResults(10);
         return $query->getResult();
 

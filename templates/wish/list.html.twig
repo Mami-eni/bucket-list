@@ -3,6 +3,13 @@
 {% block body %}
     <h1> LIST</h1>
 
+    {% if currentPage > 1 %}
+        <a href="{{ path('wish_list', {'page':currentPage-1}) }}"> previous page</a>
+    {% endif %}
+
+
+    <a href="{{ path('wish_list', {'page':currentPage+1}) }}"> next page</a>
+
     <ol class = "grille">
         {% for wish in wishList %}
             <li class="grid-item"> <a href=" {{ path('wish_detail',{'id':wish.id}) }}">  <P> {{ wish.title}} </P></a>

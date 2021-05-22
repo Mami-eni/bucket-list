@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }}|Create
+
+{% endblock %}
+
+{% block body %}
+
+    <h1> BUCKET LIST CREATION !</h1>
+
+    {{ form_start(formulaire)}}
+
+    <div class=" formulaire">
+
+    {{ form_widget(formulaire) }}
+
+    </div>
+    <button> SEND </button>
+
+    {{ form_end(formulaire) }}
+
+
+
+{% endblock %}
+
