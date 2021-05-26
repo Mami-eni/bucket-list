@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 class WishController extends AbstractController
 {
@@ -50,10 +52,21 @@ class WishController extends AbstractController
     /**
      * @Route("/create", name="wish_create")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
-        $wish= new Wish();
+
+
+        $wish=  new Wish();
         $wishForm = $this->createForm(WishType::class, $wish);
+        if($user)
+        {
+            $wish->setAuthor($user->getUsername());
+           // dd($user);
+
+
+        }
+
+
         $wish->setIsPublished(1);
         $wish->setDateCreated(new \DateTime());
         $wishForm->handleRequest($request);
@@ -67,9 +80,40 @@ class WishController extends AbstractController
             return $this->redirectToRoute("wish_detail", ["id"=> $wish->getId()]);
         }
 
-        return $this->render("wish/create.html.twig", ["formulaire"=> $wishForm->createView()]);
+
+
+        return $this->render("wish/create.html.twig", ["formulaire"=> $wishForm->createView(), "author"=>$wish->getAuthor()]);
 
 
 
     }
+
+    /**
+     * @Route("/update/{id}", name="wish_update")
+     */
+    public function update($id, Request $request, EntityManagerInterface $entityManager, WishRepository  $wishRepository): Response
+    {
+        $wish= $wishRepository ->find($id);
+        $wishForm = $this->createForm(WishType::class, $wish);
+        //$wish->setIsPublished(1);
+        $wish->setDateCreated(new \DateTime());
+
+        $wishForm->handleRequest($request);
+
+        if($wishForm->isSubmitted() && $wishForm->isValid())
+        {
+            $entityManager->persist($wish);
+            $entityManager->flush();
+            $this->addFlash( "success","Idea successfully modified!");
+
+            return $this->redirectToRoute("wish_detail", ["id"=> $wish->getId()]);
+        }
+
+        return $this->render("wish/update.html.twig", ["formulaire"=> $wishForm->createView(), 'wish'=>$wish]);
+
+
+
+    }
+
+
 }

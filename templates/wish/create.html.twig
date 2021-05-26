@@ -11,8 +11,23 @@
     {{ form_start(formulaire)}}
 
     <div class=" formulaire">
+        <div> {{  form_label(formulaire.title) }}</div>
+        <div> {{form_widget(formulaire.title) }}</div>
 
-    {{ form_widget(formulaire) }}
+        <div> {{ form_label(formulaire.description) }}</div>
+        <div> {{ form_widget(formulaire.description) }}</div>
+
+        <div> {{ form_label(formulaire.author) }}</div>
+        <div> {{ form_widget(formulaire.author) }}</div>
+
+        <div> {{ form_label(formulaire.note) }}</div>
+        <div> {{ form_widget(formulaire.note) }}</div>
+
+        <div> {{ form_label(formulaire.category) }}</div>
+        <div> {{ form_widget(formulaire.category) }}</div>
+        <div> {{ author }}</div>
+
+
 
     </div>
     <button> SEND </button>

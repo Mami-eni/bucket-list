@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }}|update
+
+{% endblock %}
+
+{% block body %}
+
+    <h1> UPDATE AN IDEA!</h1>
+
+    {{ form_start(formulaire)}}
+
+    <div class=" formulaire">
+
+        {{ form_widget(formulaire) }}
+
+    </div>
+    <button> SEND </button>
+
+    {{ form_end(formulaire) }}
+
+
+
+{% endblock %}

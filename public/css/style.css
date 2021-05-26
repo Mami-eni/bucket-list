@@ -46,3 +46,8 @@ img
 {
     display: flex;
 }
+
+.flash-success
+{
+    background-color: darkcyan;
+}

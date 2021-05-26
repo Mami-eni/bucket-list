@@ -3,7 +3,12 @@
 {% block body %}
     <h1> DETAIL</h1>
 
-    {{ wish.title }}
+
+
+  <p>  {{ wish.title }}  </p>
+
+   <p> {{ wish.category.name }} </p>
+    <p> <a href="{{ path('wish_update', {'id':wish.id}) }}"> update</a></p>
 
 {% endblock %}
 

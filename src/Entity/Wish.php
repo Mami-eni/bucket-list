@@ -78,6 +78,12 @@ class Wish
      */
     private $note;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="wishes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -151,6 +157,18 @@ class Wish
     public function setNote(float $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

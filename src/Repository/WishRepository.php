@@ -22,6 +22,8 @@ class WishRepository extends ServiceEntityRepository
     public function findBestNotation($page)
     {
         $queryBuilder = $this->createQueryBuilder('w');
+        $queryBuilder->leftJoin("w.category", "category");
+        $queryBuilder->addSelect('category');
        // $queryBuilder->andWhere('w.note >7') -> andWhere('w.isPublished = 0')->orderBy('w.note','DESC');
         $query = $queryBuilder->getQuery();
 

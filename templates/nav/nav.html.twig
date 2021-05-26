@@ -1,6 +1,19 @@
 <div class = "nav">
     <a href="{{ path('main_home') }}"> HOME</a>
     <a href="{{ path(' main_aboutus') }}"> ABOUT US</a>
-    <a href="{{ path('wish_create') }}"> CREATE</a>
     <a href="{{ path('wish_list') }}"> LIST</a>
+
+    {%  if app.user %}
+    <a href="{{ path('wish_create') }}"> ADD YOUR IDEA</a>
+    <li> <a href="{{ path('app_logout') }}"> LogOut| Hello({{ app.user.pseudo }}) </a></li>
+
+    {% else%}
+
+    <li> <a href="{{ path('app_login') }}"> login</a></li>
+    <li> <a href="{{ path('app_register') }}"> Register</a></li>
+
+    {% endif %}
+
+
+
 </div>
