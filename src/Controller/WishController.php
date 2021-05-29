@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Censurator\Censurator;
 use App\Entity\Wish;
 use App\Form\WishType;
 use App\Repository\WishRepository;
@@ -52,24 +53,33 @@ class WishController extends AbstractController
     /**
      * @Route("/create", name="wish_create")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, UserInterface $user): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, Censurator $censure): Response
     {
 
 
         $wish=  new Wish();
-        $wishForm = $this->createForm(WishType::class, $wish);
-        if($user)
-        {
-            $wish->setAuthor($user->getUsername());
-           // dd($user);
+        $textToCheck= $wish->getDescription();
 
+        $wish->setAuthor($this->getUser()->getUsername());
+        $wishForm = $this->createForm(WishType::class, $wish);
+        if(!is_null($textToCheck))
+        {
+            $newDescription= $censure->purify($textToCheck);
+            $wish->setDescription($newDescription);
 
         }
-
 
         $wish->setIsPublished(1);
         $wish->setDateCreated(new \DateTime());
         $wishForm->handleRequest($request);
+
+
+        // traitement du mot offensant appel methode service.
+
+
+
+
+
 
         if($wishForm->isSubmitted() && $wishForm->isValid())
         {
@@ -82,8 +92,7 @@ class WishController extends AbstractController
 
 
 
-        return $this->render("wish/create.html.twig", ["formulaire"=> $wishForm->createView(), "author"=>$wish->getAuthor()]);
-
+        return $this->render("wish/create.html.twig", ["formulaire"=> $wishForm->createView(),"wish"=>$wish ,"author"=>$wish->getAuthor() ]);
 
 
     }
